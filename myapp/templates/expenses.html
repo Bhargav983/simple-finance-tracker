@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflection Form</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .progress {
+            height: 20px;
+        }
+        .form-section {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1>Reflection Form</h1>
+    <div class="progress mb-4">
+        <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Step 1 of 4</div>
+    </div>
+
+    <!-- Page 1: Learning Questions -->
+    <div class="form-section">
+        <h4>Learning Questions</h4>
+        <div class="form-group">
+            <label for="learnedToday">1. What did you learn today?</label>
+            <textarea class="form-control" id="learnedToday" rows="3" placeholder="Write your answer..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="applyLearnings">2. Write 5 situations where you can apply what you have learnt:</label>
+            <textarea class="form-control" id="applyLearnings" rows="5" placeholder="List your situations..."></textarea>
+        </div>
+        <button class="btn btn-primary next-btn">Next</button>
+    </div>
+
+    <!-- Page 2: Main Questions Part 1 -->
+    <div class="form-section" style="display: none;">
+        <h4>Main Questions (Part 1)</h4>
+        <div class="form-group">
+            <label for="idealWorld">1. Write your ideal world...</label>
+            <textarea class="form-control" id="idealWorld" rows="3" placeholder="Describe your ideal world..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="passTheBuck">2. How do you pass the buck?</label>
+            <textarea class="form-control" id="passTheBuck" rows="5" placeholder="Explain your reasons..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="responsibility">3. How would the world be different?</label>
+            <textarea class="form-control" id="responsibility" rows="5" placeholder="Write your thoughts..."></textarea>
+        </div>
+        <button class="btn btn-secondary prev-btn">Previous</button>
+        <button class="btn btn-primary next-btn">Next</button>
+    </div>
+
+    <!-- Page 3: Main Questions Part 2 -->
+    <div class="form-section" style="display: none;">
+        <h4>Main Questions (Part 2)</h4>
+        <div class="form-group">
+            <label for="leaderFollower">4. Write 5 situations where you are a leader and 5 where you were a follower:</label>
+            <textarea class="form-control" id="leaderFollower" rows="5" placeholder="List your situations..."></textarea>
+        </div>
+        <button class="btn btn-secondary prev-btn">Previous</button>
+        <button class="btn btn-primary next-btn">Next</button>
+    </div>
+
+    <!-- Page 4: Final Section -->
+    <div class="form-section" style="display: none;">
+        <h4>Final Questions</h4>
+        <div class="form-group">
+            <label for="satisfaction">5. Write 10 situations you are not satisfied with:</label>
+            <textarea class="form-control" id="satisfaction" rows="5" placeholder="List your situations..."></textarea>
+        </div>
+        <div class="form-group">
+            <label for="responsibilityAction">6. Take responsibility to create the situation that way:</label>
+            <textarea class="form-control" id="responsibilityAction" rows="5" placeholder="Explain how you would take responsibility..."></textarea>
+        </div>
+        <button class="btn btn-secondary prev-btn">Previous</button>
+        <button class="btn btn-success" id="submitBtn">Submit</button>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        let currentPage = 0;
+        const pages = $('.form-section');
+        
+        function showPage(index) {
+            pages.hide();
+            $(pages[index]).show();
+            $('.progress-bar').css('width', ((index + 1) / pages.length) * 100 + '%').text(`Step ${index + 1} of ${pages.length}`);
+        }
+
+        $('.next-btn').click(function() {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        });
+
+        $('.prev-btn').click(function() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        });
+
+        $('#submitBtn').click(function() {
+            alert('Form submitted! Thank you!');
+        });
+
+        // Show the first page
+        showPage(currentPage);
+    });
+</script>
+</body>
+</html>
